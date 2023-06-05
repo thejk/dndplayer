@@ -194,7 +194,7 @@ function showSetupDialog(dialog) {
     dialog.style.display = "block";
 }
 
-function showHealthElements(collapse, collapse_value, elements) {
+function showElements(collapse, collapse_value, elements) {
     collapse.textContent = "-";
     setValue(collapse_value, false);
 
@@ -203,7 +203,7 @@ function showHealthElements(collapse, collapse_value, elements) {
     });
 }
 
-function hideHealthElements(collapse, collapse_value, elements) {
+function hideElements(collapse, collapse_value, elements) {
     collapse.textContent = "+";
     setValue(collapse_value, true);
 
@@ -280,13 +280,13 @@ function initHealth(prefix = "") {
 
     collapse.addEventListener("click", () => {
         if (collapse_value.checked) {
-            showHealthElements(collapse, collapse_value, elements);
+            showElements(collapse, collapse_value, elements);
         } else {
-            hideHealthElements(collapse, collapse_value, elements);
+            hideElements(collapse, collapse_value, elements);
         }
     });
     if (collapse_value.checked) {
-        hideHealthElements(collapse, collapse_value, elements);
+        hideElements(collapse, collapse_value, elements);
     }
 }
 

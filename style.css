@@ -9,6 +9,10 @@ button {
     min-width: 48px;
 }
 
+.hidden {
+    display: none;
+}
+
 .health_box {
     clear: both;
     margin: auto;

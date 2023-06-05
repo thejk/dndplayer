@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "csslint": "^1.0.5"
+    "csslint": "^1.0.5",
+    "htmllint-cli": "^0.0.7"
   }
 }

@@ -1,3 +1,5 @@
+"use strict";
+
 function calculateMaxHealth(
     level,
     constitution,
@@ -50,14 +52,14 @@ function setValue(element, value) {
 }
 
 function linkViewString(element, view, fallback = "") {
-    element.addEventListener("change", (e) => {
+    element.addEventListener("change", () => {
         view.textContent = element.value || fallback;
     });
     view.textContent = element.value || fallback;
 }
 
 function linkViewNumber(element, view, fallback = "") {
-    element.addEventListener("change", (e) => {
+    element.addEventListener("change", () => {
         view.textContent = parseIntOr(element.value, fallback);
     });
     view.textContent = parseIntOr(element.value, fallback);
@@ -70,7 +72,7 @@ function persistent(...elements) {
             if (value !== null) {
                 element.checked = value === "true";
             }
-            element.addEventListener("change", (e) => {
+            element.addEventListener("change", () => {
                 try {
                     window.localStorage.setItem(element.id, element.checked);
                 } catch (e) {
@@ -83,7 +85,7 @@ function persistent(...elements) {
             if (value !== null) {
                 element.value = value;
             }
-            element.addEventListener("change", (e) => {
+            element.addEventListener("change", () => {
                 try {
                     window.localStorage.setItem(element.id, element.value);
                 } catch (e) {
@@ -95,7 +97,7 @@ function persistent(...elements) {
             if (value !== null) {
                 element.textContent = value;
             }
-            element.addEventListener("change", (e) => {
+            element.addEventListener("change", () => {
                 try {
                     window.localStorage.setItem(element.id,
                                                 element.textContent);
@@ -144,7 +146,7 @@ function initHealthSetup(prefix = "") {
 
     persistent(name, max_health, level, cons, hit_dice, hill_dwarf, toughness_feat);
 
-    calculate.addEventListener("click", (e) => {
+    calculate.addEventListener("click", () => {
         if (!validateNumber(level.value, 1, -1)) {
             error.textContent = "Level must be a number >= 1";
             error.style.display = "block";
@@ -182,7 +184,7 @@ function setHealthColor(health, current, max) {
 
 function showSetupDialog(dialog) {
     const close = dialog.querySelector(".close");
-    const onclick = (e) => {
+    const onclick = () => {
         dialog.style.display = "none";
         close.removeEventListener("click", onclick);
     };
@@ -231,7 +233,7 @@ function initHealth(prefix = "") {
     current.textContent = oldMaxValue;
     persistent(current, collapse_value);
 
-    max.addEventListener("change", (e) => {
+    max.addEventListener("change", () => {
         let newMaxValue = parseIntOr(max.value, "-");
         if (current.textContent === "-" ||
             current.textContent === `${oldMaxValue}`) {
@@ -240,12 +242,12 @@ function initHealth(prefix = "") {
         oldMaxValue = newMaxValue;
         setHealthColor(health_bg, current, max);
     });
-    current.addEventListener("change", (e) => {
+    current.addEventListener("change", () => {
         setHealthColor(health_bg, current, max);
     });
     setHealthColor(health_bg, current, max);
 
-    heal.addEventListener("click", (e) => {
+    heal.addEventListener("click", () => {
         if (current.textContent === "-" || max_view.textContent === "-") return;
         setValue(current, updateInRange(
             parseInt(current.textContent),
@@ -254,7 +256,7 @@ function initHealth(prefix = "") {
             parseInt(max.value),
         ));
     });
-    hurt.addEventListener("click", (e) => {
+    hurt.addEventListener("click", () => {
         if (current.textContent === "-" || max_view.textContent === "-") return;
         setValue(current, updateInRange(
             parseInt(current.textContent),
@@ -263,18 +265,18 @@ function initHealth(prefix = "") {
             parseInt(max.value),
         ));
     });
-    rest.addEventListener("click", (e) => {
+    rest.addEventListener("click", () => {
         if (current.textContent === "-" || max_view.textContent === "-") return;
         setValue(current, parseInt(max.value));
     });
 
-    setup.addEventListener("click", (e) => {
+    setup.addEventListener("click", () => {
         showSetupDialog(health_setup_dialog);
     });
 
     const elements = [max_row, health_bg];
 
-    collapse.addEventListener("click", (e) => {
+    collapse.addEventListener("click", () => {
         if (collapse_value.checked) {
             showHealthElements(collapse, collapse_value, elements);
         } else {

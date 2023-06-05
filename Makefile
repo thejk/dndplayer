@@ -1,9 +1,9 @@
-.PHONY: all clean lint csslint htmllint npm_install
+.PHONY: all clean lint csslint htmllint jslint npm_install
 
 NPM=npm
 NPX=npx
 
-all: csslint htmllint
+all: csslint htmllint jslint
 
 clean:
 
@@ -16,3 +16,5 @@ csslint: npm_install
 htmllint: npm_install
 	$(NPX) htmllint index.html
 
+jslint: npm_install
+	$(NPX) eslint script.js

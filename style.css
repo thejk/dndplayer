@@ -139,4 +139,8 @@ fieldset {
     .health_bg {
         color: black;
     }
+
+    .setup_dialog_content {
+        color: black;
+    }
 }

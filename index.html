@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>DnD Player Companion</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <div id="health" class="health_box">
+      <span id="health_collapse_row" class="health_collapse_row">
+        <button id="health_collapse">-</button>
+        <input id="health_collapse_value" type="checkbox" style="display: none;">
+      </span>
+      <span id="health_title_row" class="health_title_row">
+        Health
+      </span>
+      <span id="health_max_row" class="health_max_row">
+        Max <span id="health_max_health">-</span> <button id="health_rest" type="button">Rest</button> <button id="health_show_setup" type="button">Setup</button>
+      </span><br>
+      <div id="health_bg" class="health_bg">
+        <button id="health_heal" class="health_heal" type="button">+</button><br>
+        <span id="health_current_health" class="health_current_health">-</span><br>
+        <button id="health_hurt" class="health_hurt" type="button">-</button>
+      </div>
+    </div>
+    <div id="health_setup" class="setup_dialog">
+      <div class="setup_dialog_content">
+        <span class="close">&times;</span>
+        <form>
+          <label for="health_setup_name">Name</label>
+          <input type="text" id="health_setup_name" name="name">
+          <br>
+          <label for="health_setup_max_health">Max health</label>
+          <input type="number" id="health_setup_max_health" name="max_health">
+          <br>
+          <fieldset>
+            <legend>Calculate max health</legend>
+            <label for="health_setup_level">Character level</label>
+            <input type="number" id="health_setup_level" name="level">
+            <br>
+            <label for="health_setup_cons">Constitution</label>
+            <input type="number" id="health_setup_cons" name="cons">
+            <br>
+            <label for="health_setup_hit_dice">Hit Dice</label>
+            <select id="health_setup_hit_dice" name="hit_dice">
+              <option value="d4">d4</option>
+              <option value="d6">d6</option>
+              <option value="d8">d8</option>
+              <option value="d10">d10</option>
+              <option value="d12">d12</option>
+            </select>
+            <br>
+            <label for="health_setup_hill_dwarf">Hill Dwarf</label>
+            <input type="checkbox" id="health_setup_hill_dwarf" name="hill_dwarf">
+            <br>
+            <label for="health_setup_toughness_feat">Toughness feat</label>
+            <input type="checkbox" id="health_setup_toughness_feat" name="toughness_feat">
+            <br>
+            <button id="health_setup_calculate" type="button">Calculate</button>
+            <div id="health_setup_error" style="display: none;" class="error" />
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div id="pet_health" class="health_box">
+      <span id="pet_health_collapse_row" class="health_collapse_row">
+        <button id="pet_health_collapse">-</button>
+        <input id="pet_health_collapse_value" type="checkbox" style="display: none;">
+      </span>
+      <span id="pet_health_title_row" class="health_title_row">
+        Health
+      </span>
+      <span id="pet_health_max_row" class="health_max_row">
+        Max <span id="pet_health_max_health">-</span> <button id="pet_health_rest" type="button">Rest</button> <button id="pet_health_show_setup" type="button">Setup</button>
+      </span><br>
+      <div id="pet_health_bg" class="health_bg">
+        <button id="pet_health_heal" class="health_heal" type="button">+</button><br>
+        <span id="pet_health_current_health" class="health_current_health">-</span><br>
+        <button id="pet_health_hurt" class="health_hurt" type="button">-</button>
+      </div>
+    </div>
+    <div id="pet_health_setup" class="setup_dialog">
+      <div class="setup_dialog_content">
+        <span class="close">&times;</span>
+        <form>
+          <label for="pet_health_setup_name">Name</label>
+          <input type="text" id="pet_health_setup_name" name="name">
+          <br>
+          <label for="pet_health_setup_max_health">Max health</label>
+          <input type="number" id="pet_health_setup_max_health" name="max_health">
+          <br>
+          <fieldset>
+            <legend>Calculate max health</legend>
+            <label for="pet_health_setup_level">Character level</label>
+            <input type="number" id="pet_health_setup_level" name="level">
+            <br>
+            <label for="pet_health_setup_cons">Constitution</label>
+            <input type="number" id="pet_health_setup_cons" name="cons">
+            <br>
+            <label for="pet_health_setup_hit_dice">Hit Dice</label>
+            <select id="pet_health_setup_hit_dice" name="hit_dice">
+              <option value="d4">d4</option>
+              <option value="d6">d6</option>
+              <option value="d8">d8</option>
+              <option value="d10">d10</option>
+              <option value="d12">d12</option>
+            </select>
+            <br>
+            <label for="pet_health_setup_hill_dwarf">Hill Dwarf</label>
+            <input type="checkbox" id="pet_health_setup_hill_dwarf" name="hill_dwarf">
+            <br>
+            <label for="pet_health_setup_toughness_feat">Toughness feat</label>
+            <input type="checkbox" id="pet_health_setup_toughness_feat" name="toughness_feat">
+            <br>
+            <button id="pet_health_setup_calculate" type="button">Calculate</button>
+            <div id="pet_health_setup_error" style="display: none;" class="error" />
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

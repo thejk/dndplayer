@@ -1,0 +1,124 @@
+body {
+    font-family: sans-serif;
+    font-size: 45px;
+}
+
+button {
+    min-width: 48px;
+    min-height: 48px;
+    margin: 10px 0 10px 0;
+}
+
+.health_box {
+    max-width: 500px;
+    text-align: center;
+    margin: auto;
+    clear: both;
+}
+
+.health_collapse_row {
+    float: left;
+}
+
+.health_collapse_row button {
+    float: left;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.health_title_row {
+    float: left;
+    padding-left: 10px;
+}
+
+.health_max_row {
+    float: right;
+}
+
+.health_max_row button {
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.health_bg {
+    clear: right;
+}
+
+.health_bg button {
+    margin: 10px;
+    font-size: 45px;
+    color: white;
+    background-color: inherit;
+    border: 0;
+    cursor: pointer;
+}
+
+.health .health_heal,
+.health .health_hurt {
+    font-size: 150%;
+}
+
+.health_current_health {
+    font-size: 300%;
+}
+
+.setup_dialog {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.setup_dialog_content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    border: 1px solid #888;
+    max-width: 400px;
+    font-size: 20px;
+}
+
+.setup_dialog_content form {
+    padding: 30px 30px 0 30px;
+}
+
+.setup_dialog_content .close {
+    float: right;
+    font-size: 48px;
+    padding-right: 10px;
+}
+
+.setup_dialog_content .close:hover,
+.setup_dialog_content .close:focus {
+    cursor: pointer;
+}
+
+.setup_dialog_content input {
+    font-size: 20px;
+    width: 5ch;
+}
+
+.setup_dialog_content input[type="text"] {
+    width: 10ch;
+}
+
+.setup_dialog_content label {
+    display: inline-block;
+    padding: 5px 0 5px 0;
+}
+
+.setup_dialog_content select {
+    font-size: 20px;
+}
+
+.setup_dialog_content button {
+    font-size: 35px;
+}
+
+fieldset {
+    margin: 10px 0 10px 0;
+}

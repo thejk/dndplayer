@@ -1,3 +1,5 @@
+// Copyright (c) 2023 Joel Klinghed, see LICENSE file.
+
 "use strict";
 
 function calculateMaxHealth(

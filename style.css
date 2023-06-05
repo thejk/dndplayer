@@ -4,16 +4,16 @@ body {
 }
 
 button {
-    min-width: 48px;
-    min-height: 48px;
     margin: 10px 0 10px 0;
+    min-height: 48px;
+    min-width: 48px;
 }
 
 .health_box {
+    clear: both;
+    margin: auto;
     max-width: 500px;
     text-align: center;
-    margin: auto;
-    clear: both;
 }
 
 .health_collapse_row {
@@ -22,8 +22,8 @@ button {
 
 .health_collapse_row button {
     float: left;
-    vertical-align: middle;
     margin: 5px;
+    vertical-align: middle;
 }
 
 .health_title_row {
@@ -36,8 +36,8 @@ button {
 }
 
 .health_max_row button {
-    vertical-align: middle;
     margin: 5px;
+    vertical-align: middle;
 }
 
 .health_bg {
@@ -45,12 +45,12 @@ button {
 }
 
 .health_bg button {
-    margin: 10px;
-    font-size: 45px;
-    color: white;
     background-color: inherit;
     border: 0;
+    color: white;
     cursor: pointer;
+    font-size: 45px;
+    margin: 10px;
 }
 
 .health .health_heal,
@@ -63,23 +63,24 @@ button {
 }
 
 .setup_dialog {
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     display: none;
-    position: fixed;
-    z-index: 1;
+    height: 100%;
     left: 0;
+    overflow: auto;
+    position: fixed;
     top: 0;
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 
 .setup_dialog_content {
     background-color: #fefefe;
-    margin: 10% auto;
     border: 1px solid #888;
-    max-width: 400px;
     font-size: 20px;
+    margin: 10% auto;
+    max-width: 400px;
 }
 
 .setup_dialog_content form {

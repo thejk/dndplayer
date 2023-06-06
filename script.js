@@ -349,6 +349,20 @@ function appendInventoryItemRow(prefix, table_body, items, item) {
         }
     });
     count_col.appendChild(count);
+    const inc_count = document.createElement("BUTTON");
+    inc_count.type = "button";
+    inc_count.textContent = "+";
+    inc_count.addEventListener("click", () => {
+        setValue(count, parseIntOr(count.value, 0) + 1);
+    });
+    count_col.appendChild(inc_count);
+    const dec_count = document.createElement("BUTTON");
+    dec_count.type = "button";
+    dec_count.textContent = "-";
+    dec_count.addEventListener("click", () => {
+        setValue(count, parseIntOr(count.value, 0) - 1);
+    });
+    count_col.appendChild(dec_count);
     row.appendChild(title_col);
     row.appendChild(count_col);
     table_body.appendChild(row);

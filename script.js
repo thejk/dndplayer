@@ -469,7 +469,14 @@ function autocomplete(datalist, value) {
         const id = ++current_autocomplete_id;
         items_data_fetch.then((data) => {
             if (current_autocomplete_id === id) {
-                updateDatalist(datalist, complete(data, value));
+                const list = complete(data, value);
+                // Hide the datalist if entry matches exactly, can be
+                // annoying otherwise.
+                if (list.length === 1 && list[0] === value) {
+                    updateDatalist(datalist, []);
+                } else {
+                    updateDatalist(datalist, list);
+                }
             }
         });
     }
@@ -487,13 +494,14 @@ function initInventorySetup(prefix, setup_dialog, table_body, items) {
     });
     add_title.addEventListener("change", () => {
         add.disabled = add_title.value === "";
+        autocomplete(datalist, add_title.value);
     });
     add.disabled = add_title.value === "";
 
     add.addEventListener("click", () => {
         if (add_title.value !== "") {
             addInventory(prefix, table_body, setup_table_body, items, add_title.value);
-            add_title.value = "";
+            setValue(add_title, "");
         }
     });
 }

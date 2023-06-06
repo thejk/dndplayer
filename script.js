@@ -566,12 +566,99 @@ function initInventory(prefix = "") {
     }
 }
 
+function initSpellslotsSetup(prefix = "") {
+    for (let level = 1; level <= 9; level++) {
+        const slot = document.querySelector(`#${prefix}spellslots_setup_lvl${level}`);
+        // Not using setValue, this is just the defaut.
+        slot.value = "0";
+        persistent(slot);
+    }
+}
+
+function updateSpellslotLevel(row, slot) {
+    const count = parseIntOr(slot.value, 0);
+    if (count > 0) {
+        row.style.display = '';
+        const elements = row.getElementsByTagName("INPUT");
+        while (elements.length > count) {
+            row.removeChild(elements[elements.length - 1]);
+        }
+        while (elements.length < count) {
+            const checkbox = document.createElement("INPUT");
+            checkbox.type = "checkbox";
+            checkbox.checked = false;
+            checkbox.id = `${row.id}_slot${1 + elements.length}`;
+            row.appendChild(checkbox);
+            persistent(checkbox);
+        }
+    } else {
+        row.style.display = 'none';
+    }
+}
+
+function initSpellslots(prefix = "") {
+    const rest = document.querySelector(`#${prefix}spellslots_rest`);
+    const setup = document.querySelector(`#${prefix}spellslots_show_setup`);
+    const setup_dialog = document.querySelector(`#${prefix}spellslots_setup`);
+    const top_row_right = document.querySelector(`#${prefix}spellslots .spellslots_top_row_right`);
+    const slots = document.querySelector(`#${prefix}spellslots_levels`);
+    const collapse = document.querySelector(`#${prefix}spellslots_collapse`);
+    const collapse_value = document.querySelector(`#${prefix}spellslots_collapse_value`);
+
+    persistent(collapse_value);
+
+    for (let level = 1; level <= 9; level++) {
+        const row = document.createElement("DIV");
+        row.id = `${prefix}spellslots_levels_lvl${level}`;
+        row.className = "spellslots_levels_row";
+        const label = document.createTextNode(`Lvl ${level}`);
+        row.appendChild(label);
+        const slot = document.querySelector(`#${prefix}spellslots_setup_lvl${level}`);
+        slot.addEventListener("change", () => {
+            updateSpellslotLevel(row, slot);
+        });
+        updateSpellslotLevel(row, slot);
+        slots.appendChild(row);
+    }
+
+    setup.addEventListener("click", () => {
+        showSetupDialog(setup_dialog);
+    });
+
+    rest.addEventListener("click", () => {
+        for (let level = 1; level <= 9; level++) {
+            const slot = document.querySelector(`#${prefix}spellslots_setup_lvl${level}`);
+            const row_id = `${prefix}spellslots_levels_lvl${level}`;
+            const count = parseIntOr(slot.value, 0);
+            for (let slot = 1; slot <= count; slot++) {
+                const element = document.querySelector(`#${row_id}_slot${slot}`);
+                setValue(element, false);
+            }
+        }
+    });
+
+    const elements = [top_row_right, slots];
+
+    collapse.addEventListener("click", () => {
+        if (collapse_value.checked) {
+            showElements(collapse, collapse_value, elements);
+        } else {
+            hideElements(collapse, collapse_value, elements);
+        }
+    });
+    if (collapse_value.checked) {
+        hideElements(collapse, collapse_value, elements);
+    }
+}
+
 function init() {
     initHealthSetup();
     initHealth();
     initHealthSetup("pet_");
     initHealth("pet_");
     initInventory();
+    initSpellslotsSetup();
+    initSpellslots();
 }
 
 window.addEventListener("DOMContentLoaded", init);

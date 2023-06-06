@@ -172,6 +172,38 @@ fieldset {
     text-align: right;
 }
 
+.spellslots_box {
+    margin: auto;
+    max-width: 500px;
+}
+
+.spellslots_top_row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.spellslots_top_row > span {
+    align-items: center;
+    display: flex;
+}
+
+.spellslots_levels {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.spellslots_levels_row {
+    align-items: center;
+    display: flex;
+}
+
+.spellslots_levels input[type="checkbox"] {
+    margin-left: 10px;
+    min-height: 48px;
+    min-width: 48px;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: black;

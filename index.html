@@ -5,7 +5,7 @@
     <title>DnD Player Companion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </head>
   <body>
     <div id="health" class="health_box">
@@ -149,7 +149,8 @@
           <table id="inventory_setup_tbl" class="inventory_setup_tbl">
             <tbody>
               <tr id="inventory_setup_add_row">
-                <td><input type="text" id="inventory_setup_add_title" placeholder="Title"></td>
+                <td><input type="text" id="inventory_setup_add_title" list="inventory_title_suggestions" placeholder="Title" autocomplete="off"></td>
+                <datalist id="inventory_title_suggestions"></datalist>
                 <td class="inventory_setup_add_col"><button id="inventory_setup_add" type="button">Add</button></td>
               </tr>
             </tbody>

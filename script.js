@@ -2,6 +2,8 @@
 
 "use strict";
 
+import { complete } from "./tree.js";
+
 function calculateMaxHealth(
     level,
     constitution,
@@ -418,13 +420,70 @@ function addInventory(prefix, table_body, setup_table_body, items, title) {
     insertInventorySetupItemRow(prefix, table_body, setup_table_body, items, item);
 }
 
+function updateDatalist(datalist, options) {
+    const elements = datalist.getElementsByTagName("OPTION");
+    let element_index = 0;
+    let options_index = 0;
+    while (element_index < elements.length && options_index < options.length) {
+        if (elements[element_index].textContent == options[options_index]) {
+            element_index++;
+            options_index++;
+        } else if (elements[element_index].textContent < options[options_index]) {
+            datalist.removeChild(elements[element_index]);
+        } else /* if (elements[element_index].textContent > options[options_index]) */ {
+            const option = document.createElement("OPTION");
+            option.textContent = options[options_index];
+            datalist.insertBefore(option, elements[element_index]);
+            options_index++;
+            element_index++;
+        }
+    }
+    while (element_index < elements.length) {
+        datalist.removeChild(elements[element_index]);
+    }
+    while (options_index < options.length) {
+        const option = document.createElement("OPTION");
+        option.textContent = options[options_index];
+        datalist.appendChild(option);
+        options_index++;
+    }
+}
+
+var items_data_fetch = undefined;
+var current_autocomplete_id = 0;
+
+async function fetchItemsData() {
+    const response = await fetch("items.tree");
+    const buffer = await response.arrayBuffer();
+    return new DataView(buffer, buffer.byteOffset, buffer.byteLength);
+}
+
+function autocomplete(datalist, value) {
+    if (items_data_fetch === undefined) {
+        items_data_fetch = fetchItemsData();
+    }
+
+    if (value.length <= 1) {
+        updateDatalist(datalist, []);
+    } else {
+        const id = ++current_autocomplete_id;
+        items_data_fetch.then((data) => {
+            if (current_autocomplete_id === id) {
+                updateDatalist(datalist, complete(data, value));
+            }
+        });
+    }
+}
+
 function initInventorySetup(prefix, setup_dialog, table_body, items) {
     const setup_table_body = document.querySelector(`#${prefix}inventory_setup_tbl tbody`);
     const add = document.querySelector(`#${prefix}inventory_setup_add`);
     const add_title = document.querySelector(`#${prefix}inventory_setup_add_title`);
+    const datalist = document.querySelector(`#${prefix}inventory_title_suggestions`);
 
     add_title.addEventListener("input", () => {
         add.disabled = add_title.value === "";
+        autocomplete(datalist, add_title.value);
     });
     add_title.addEventListener("change", () => {
         add.disabled = add_title.value === "";

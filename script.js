@@ -9,8 +9,9 @@ function calculateMaxHealth(
     hill_dwarf,
     toughness_feat,
 ) {
-    const constituon_Modifier = constitution - 11;
-    let max_health = level * (hit_dice + constituon_Modifier);
+    const constitution_modifier = Math.ceil((constitution - 11) / 2);
+    const avg = hit_dice / 2 + 1;
+    let max_health = hit_dice + (level - 1) * avg + level * constitution_modifier;
     if (hill_dwarf) {
         // Your hit point maximum increases by 1,
         // and it increases by 1 every time you gain a level.

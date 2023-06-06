@@ -2,21 +2,24 @@
 <html>
   <head>
     <title>DnD Player Companion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript" src="script.js"></script>
   </head>
   <body>
     <div id="health" class="health_box">
-      <span id="health_collapse_row" class="health_collapse_row">
-        <button id="health_collapse">-</button>
-        <input id="health_collapse_value" class="hidden" type="checkbox">
-      </span>
-      <span id="health_title_row" class="health_title_row">
-        Hit points
-      </span>
-      <span id="health_max_row" class="health_max_row">
-        Max <span id="health_max_health">-</span> <button id="health_rest" type="button">Rest</button> <button id="health_show_setup" type="button">Setup</button>
-      </span><br>
+      <div class="health_top_row">
+        <span class="health_top_row_left">
+          <button id="health_collapse" type="button">-</button>
+          <input id="health_collapse_value" class="hidden" type="checkbox">
+          <span id="health_title" class="health_title">
+            Hit points
+          </span>
+        </span>
+        <span class="health_top_row_right">
+          Max <span id="health_max_health" class="health_max_health">-</span> <button id="health_rest" type="button">Rest</button> <button id="health_show_setup" type="button">Setup</button>
+        </span>
+      </div>
       <div id="health_bg" class="health_bg">
         <button id="health_heal" class="health_heal" type="button">+</button><br>
         <span id="health_current_health" class="health_current_health">-</span><br>
@@ -63,16 +66,18 @@
       </div>
     </div>
     <div id="pet_health" class="health_box">
-      <span id="pet_health_collapse_row" class="health_collapse_row">
-        <button id="pet_health_collapse">-</button>
-        <input id="pet_health_collapse_value" type="checkbox" class="hidden">
-      </span>
-      <span id="pet_health_title_row" class="health_title_row">
-        Hit points
-      </span>
-      <span id="pet_health_max_row" class="health_max_row">
-        Max <span id="pet_health_max_health">-</span> <button id="pet_health_rest" type="button">Rest</button> <button id="pet_health_show_setup" type="button">Setup</button>
-      </span><br>
+      <div class="health_top_row">
+        <span class="health_top_row_left">
+          <button id="pet_health_collapse" type="button">-</button>
+          <input id="pet_health_collapse_value" class="hidden" type="checkbox">
+          <span id="pet_health_title" class="health_title">
+            Hit points
+          </span>
+        </span>
+        <span class="health_top_row_right">
+          Max <span id="pet_health_max_health" class="health_max_health">-</span> <button id="pet_health_rest" type="button">Rest</button> <button id="pet_health_show_setup" type="button">Setup</button>
+        </span>
+      </div>
       <div id="pet_health_bg" class="health_bg">
         <button id="pet_health_heal" class="health_heal" type="button">+</button><br>
         <span id="pet_health_current_health" class="health_current_health">-</span><br>
@@ -119,16 +124,18 @@
       </div>
     </div>
     <div id="inventory" class="inventory_box">
-      <span id="inventory_collapse_row" class="inventory_collapse_row">
-        <button id="inventory_collapse">-</button>
-        <input id="inventory_collapse_value" class="hidden" type="checkbox">
-      </span>
-      <span id="inventory_title_row" class="inventory_title_row">
-        Inventory
-      </span>
-      <span id="inventory_setup_row" class="inventory_setup_row">
-        <button id="inventory_show_setup" type="button">Setup</button>
-      </span><br>
+      <div class="inventory_top_row">
+        <span class="inventory_top_row_left">
+          <button id="inventory_collapse" type="button">-</button>
+          <input id="inventory_collapse_value" class="hidden" type="checkbox">
+          <span id="inventory_title" class="inventory_title">
+            Inventory
+          </span>
+        </span>
+        <span class="inventory_top_row_right">
+          <button id="inventory_show_setup" type="button">Setup</button>
+        </span>
+      </div>
       <table id="inventory_tbl" class="inventory_tbl">
         <tbody>
         </tbody>

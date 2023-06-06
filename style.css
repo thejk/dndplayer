@@ -2,11 +2,11 @@
 
 body {
     font-family: sans-serif;
-    font-size: 45px;
+    font-size: 25px;
 }
 
 button {
-    margin: 10px 0 10px 0;
+    margin: 10px;
     min-height: 48px;
     min-width: 48px;
 }
@@ -22,32 +22,19 @@ button {
     text-align: center;
 }
 
-.health_collapse_row {
-    float: left;
+.health_max_health {
+    margin-left: 10px;
 }
 
-.health_collapse_row button {
-    float: left;
-    margin: 5px;
-    vertical-align: middle;
+.health_top_row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
-.health_title_row {
-    float: left;
-    padding-left: 10px;
-}
-
-.health_max_row {
-    float: right;
-}
-
-.health_max_row button {
-    margin: 5px;
-    vertical-align: middle;
-}
-
-.health_bg {
-    clear: right;
+.health_top_row > span {
+    align-items: center;
+    display: flex;
 }
 
 .health_bg button {
@@ -131,38 +118,23 @@ fieldset {
 }
 
 .inventory_box {
-    clear: both;
     margin: auto;
     max-width: 500px;
     text-align: center;
 }
 
-.inventory_collapse_row {
-    float: left;
+.inventory_top_row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
-.inventory_collapse_row button {
-    float: left;
-    margin: 5px;
-    vertical-align: middle;
-}
-
-.inventory_title_row {
-    float: left;
-    padding-left: 10px;
-}
-
-.inventory_setup_row {
-    float: right;
-}
-
-.inventory_setup_row button {
-    margin: 5px;
-    vertical-align: middle;
+.inventory_top_row > span {
+    align-items: center;
+    display: flex;
 }
 
 .inventory_tbl {
-    clear: both;
     width: 100%;
 }
 

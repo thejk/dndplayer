@@ -195,12 +195,14 @@ function showSetupDialog(dialog) {
     dialog.style.display = "block";
 }
 
+const showHideMemory = {};
+
 function showElements(collapse, collapse_value, elements) {
     collapse.textContent = "-";
     setValue(collapse_value, false);
 
     elements.forEach(element => {
-        element.style.display = 'revert';
+        element.style.display = getOrDefalt(showHideMemory[element.id], 'revert');
     });
 }
 
@@ -209,14 +211,15 @@ function hideElements(collapse, collapse_value, elements) {
     setValue(collapse_value, true);
 
     elements.forEach(element => {
+        showHideMemory[element.id] = element.style.display;
         element.style.display = 'none';
     });
 }
 
 function initHealth(prefix = "") {
     const name = document.querySelector(`#${prefix}health_setup_name`);
-    const name_view = document.querySelector(`#${prefix}health_title_row`);
-    const max_row = document.querySelector(`#${prefix}health_max_row`);
+    const name_view = document.querySelector(`#${prefix}health_title`);
+    const top_row_right = document.querySelector(`#${prefix}health .health_top_row_right`);
     const max = document.querySelector(`#${prefix}health_setup_max_health`);
     const max_view = document.querySelector(`#${prefix}health_max_health`);
     const current = document.querySelector(`#${prefix}health_current_health`);
@@ -277,7 +280,7 @@ function initHealth(prefix = "") {
         showSetupDialog(health_setup_dialog);
     });
 
-    const elements = [max_row, health_bg];
+    const elements = [top_row_right, health_bg];
 
     collapse.addEventListener("click", () => {
         if (collapse_value.checked) {
@@ -442,7 +445,7 @@ function updateInventorySetup(prefix, setup_dialog, table_body, items) {
 function initInventory(prefix = "") {
     const setup = document.querySelector(`#${prefix}inventory_show_setup`);
     const setup_dialog = document.querySelector(`#${prefix}inventory_setup`);
-    const setup_row = document.querySelector(`#${prefix}inventory_setup_row`);
+    const top_row_right = document.querySelector(`#${prefix}inventory .inventory_top_row_right`);
     const table = document.querySelector(`#${prefix}inventory_tbl`);
     const table_body = document.querySelector(`#${prefix}inventory_tbl tbody`);
     const collapse = document.querySelector(`#${prefix}inventory_collapse`);
@@ -468,7 +471,7 @@ function initInventory(prefix = "") {
         showSetupDialog(setup_dialog);
     });
 
-    const elements = [setup_row, table];
+    const elements = [top_row_right, table];
 
     collapse.addEventListener("click", () => {
         if (collapse_value.checked) {

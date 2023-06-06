@@ -229,7 +229,7 @@ function initHealth(prefix = "") {
     const collapse = document.querySelector(`#${prefix}health_collapse`);
     const collapse_value = document.querySelector(`#${prefix}health_collapse_value`);
 
-    linkViewString(name, name_view, "Health");
+    linkViewString(name, name_view, "Hit points");
     linkViewNumber(max, max_view);
 
     let oldMaxValue = parseIntOr(max.value, "-");

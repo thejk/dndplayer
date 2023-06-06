@@ -1,5 +1,6 @@
 {
     "ignore": [
+        "box-sizing",
         "font-sizes"
     ],
     "warnings": [

@@ -135,6 +135,8 @@ fieldset {
 }
 
 .inventory_tbl {
+    box-sizing: border-box;
+    padding-left: 15px;
     width: 100%;
 }
 

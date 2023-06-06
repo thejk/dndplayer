@@ -8,7 +8,7 @@ all: csslint htmllint jslint
 clean:
 
 npm_install:
-	$(NPM) install
+	$(NPM) install --no-audit --no-fund --no-save
 
 csslint: npm_install
 	$(NPX) csslint style.css

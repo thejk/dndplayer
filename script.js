@@ -291,11 +291,203 @@ function initHealth(prefix = "") {
     }
 }
 
+function defaultItems() {
+    return [
+        {
+            title: "Copper",
+            count: 0,
+            deletable: false,
+        },
+        {
+            title: "Silver",
+            count: 0,
+            deletable: false,
+        },
+        {
+            title: "Electrum",
+            count: 0,
+            deletable: false,
+        },
+        {
+            title: "Gold",
+            count: 0,
+            deletable: false,
+        },
+        {
+            title: "Platinum",
+            count: 0,
+            deletable: false,
+        },
+    ];
+}
+
+function getOrDefalt(value, fallback) {
+    if (typeof value === "undefined")
+        return fallback;
+    return value;
+}
+
+function appendInventoryItemRow(prefix, table_body, items, item) {
+    const row = document.createElement("TR");
+    const title_col = document.createElement("TD");
+    const count_col = document.createElement("TD");
+    title_col.textContent = item.title;
+    count_col.className = "inventory_count_col";
+    const count = document.createElement("INPUT");
+    count.type = "number";
+    count.min = 0;
+    count.value = item.count;
+    count.addEventListener("change", () => {
+        item.count = parseIntOr(count.value, 0)
+        try {
+            window.localStorage.setItem(`${prefix}inventory`, JSON.stringify(items));
+        } catch (e) {
+            // Ignore errors
+        }
+    });
+    count_col.appendChild(count);
+    row.appendChild(title_col);
+    row.appendChild(count_col);
+    table_body.appendChild(row);
+}
+
+function insertInventorySetupItemRow(prefix, table_body, setup_table_body, items, item, add_row) {
+    if (add_row === undefined) {
+        add_row = setup_table_body.querySelector(`#${prefix}inventory_setup_add_row`);
+    }
+
+    const row = document.createElement("TR");
+    const title_col = document.createElement("TD");
+    const del_col = document.createElement("TD");
+    title_col.textContent = item.title;
+    del_col.className = "inventory_setup_del_col";
+    const del_button = document.createElement("BUTTON");
+    del_button.type = "button";
+    del_button.textContent = "Del";
+    if (getOrDefalt(item.deletable, true)) {
+        del_button.addEventListener("click", () => {
+            const i = items.indexOf(item);
+            items.splice(i, 1);
+            try {
+                window.localStorage.setItem(`${prefix}inventory`, JSON.stringify(items));
+            } catch (e) {
+                // Ignore errors
+            }
+            table_body.removeChild(table_body.getElementsByTagName("TR")[i]);
+            setup_table_body.removeChild(setup_table_body.getElementsByTagName("TR")[i]);
+        });
+    } else {
+        del_button.disabled = true;
+    }
+    del_col.appendChild(del_button);
+    row.appendChild(title_col);
+    row.appendChild(del_col);
+    setup_table_body.insertBefore(row, add_row);
+}
+
+function addInventory(prefix, table_body, setup_table_body, items, title) {
+    const item = {
+        title: title,
+        count: 1,
+        deletable: true,
+    };
+    items.push(item);
+    try {
+        window.localStorage.setItem(`${prefix}inventory`, JSON.stringify(items));
+    } catch (e) {
+        // Ignore errors
+    }
+    appendInventoryItemRow(prefix, table_body, items, item);
+    insertInventorySetupItemRow(prefix, table_body, setup_table_body, items, item);
+}
+
+function initInventorySetup(prefix, setup_dialog, table_body, items) {
+    const setup_table_body = document.querySelector(`#${prefix}inventory_setup_tbl tbody`);
+    const add = document.querySelector(`#${prefix}inventory_setup_add`);
+    const add_title = document.querySelector(`#${prefix}inventory_setup_add_title`);
+
+    add_title.addEventListener("input", () => {
+        add.disabled = add_title.value === "";
+    });
+    add_title.addEventListener("change", () => {
+        add.disabled = add_title.value === "";
+    });
+    add.disabled = add_title.value === "";
+
+    add.addEventListener("click", () => {
+        if (add_title.value !== "") {
+            addInventory(prefix, table_body, setup_table_body, items, add_title.value);
+            add_title.value = "";
+        }
+    });
+}
+
+function updateInventorySetup(prefix, setup_dialog, table_body, items) {
+    const setup_table_body = document.querySelector(`#${prefix}inventory_setup_tbl tbody`);
+
+    // Make the add row the first child by removing all rows before it
+    const rows = setup_table_body.getElementsByTagName("TR");
+    let add_row = rows[0];
+    while (add_row.id != `${prefix}inventory_setup_add_row`) {
+        setup_table_body.removeChild(add_row);
+        add_row = rows[0];
+    }
+
+    // Insert items before add row
+    items.forEach(item => {
+        insertInventorySetupItemRow(prefix, table_body, setup_table_body, items, item, add_row);
+    });
+}
+
+function initInventory(prefix = "") {
+    const setup = document.querySelector(`#${prefix}inventory_show_setup`);
+    const setup_dialog = document.querySelector(`#${prefix}inventory_setup`);
+    const setup_row = document.querySelector(`#${prefix}inventory_setup_row`);
+    const table = document.querySelector(`#${prefix}inventory_tbl`);
+    const table_body = document.querySelector(`#${prefix}inventory_tbl tbody`);
+    const collapse = document.querySelector(`#${prefix}inventory_collapse`);
+    const collapse_value = document.querySelector(`#${prefix}inventory_collapse_value`);
+
+    persistent(collapse_value);
+
+    let items = window.localStorage.getItem(`${prefix}inventory`);
+    if (items == null) {
+        items = defaultItems();
+    } else {
+        items = JSON.parse(items);
+    }
+
+    items.forEach(item => {
+        appendInventoryItemRow(prefix, table_body, items, item);
+    });
+
+    initInventorySetup(prefix, setup_dialog, table_body, items);
+
+    setup.addEventListener("click", () => {
+        updateInventorySetup(prefix, setup_dialog, table_body, items);
+        showSetupDialog(setup_dialog);
+    });
+
+    const elements = [setup_row, table];
+
+    collapse.addEventListener("click", () => {
+        if (collapse_value.checked) {
+            showElements(collapse, collapse_value, elements);
+        } else {
+            hideElements(collapse, collapse_value, elements);
+        }
+    });
+    if (collapse_value.checked) {
+        hideElements(collapse, collapse_value, elements);
+    }
+}
+
 function init() {
     initHealthSetup();
     initHealth();
     initHealthSetup("pet_");
     initHealth("pet_");
+    initInventory();
 }
 
 window.addEventListener("DOMContentLoaded", init);

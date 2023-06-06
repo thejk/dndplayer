@@ -130,6 +130,60 @@ fieldset {
     margin: 10px 0 10px 0;
 }
 
+.inventory_box {
+    clear: both;
+    margin: auto;
+    max-width: 500px;
+    text-align: center;
+}
+
+.inventory_collapse_row {
+    float: left;
+}
+
+.inventory_collapse_row button {
+    float: left;
+    margin: 5px;
+    vertical-align: middle;
+}
+
+.inventory_title_row {
+    float: left;
+    padding-left: 10px;
+}
+
+.inventory_setup_row {
+    float: right;
+}
+
+.inventory_setup_row button {
+    margin: 5px;
+    vertical-align: middle;
+}
+
+.inventory_tbl {
+    clear: both;
+    width: 100%;
+}
+
+.inventory_tbl input[type="number"] {
+    font-size: 20px;
+    width: 5ch;
+}
+
+.inventory_tbl .inventory_count_col {
+    text-align: right;
+}
+
+.inventory_setup_tbl {
+    width: 100%;
+}
+
+.inventory_setup_tbl .inventory_add_col,
+.inventory_setup_tbl .inventory_del_col {
+    text-align: right;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: black;
@@ -141,6 +195,11 @@ fieldset {
     }
 
     .setup_dialog_content {
+        color: black;
+    }
+
+    /* <table> has weird inheritance rules in chromium based browsers */
+    .setup_dialog_content table {
         color: black;
     }
 }

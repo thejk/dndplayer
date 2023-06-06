@@ -118,5 +118,36 @@
         </form>
       </div>
     </div>
+    <div id="inventory" class="inventory_box">
+      <span id="inventory_collapse_row" class="inventory_collapse_row">
+        <button id="inventory_collapse">-</button>
+        <input id="inventory_collapse_value" class="hidden" type="checkbox">
+      </span>
+      <span id="inventory_title_row" class="inventory_title_row">
+        Inventory
+      </span>
+      <span id="inventory_setup_row" class="inventory_setup_row">
+        <button id="inventory_show_setup" type="button">Setup</button>
+      </span><br>
+      <table id="inventory_tbl" class="inventory_tbl">
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div id="inventory_setup" class="setup_dialog">
+      <div class="setup_dialog_content">
+        <span class="close">&times;</span>
+        <form>
+          <table id="inventory_setup_tbl" class="inventory_setup_tbl">
+            <tbody>
+              <tr id="inventory_setup_add_row">
+                <td><input type="text" id="inventory_setup_add_title" placeholder="Title"></td>
+                <td class="inventory_setup_add_col"><button id="inventory_setup_add" type="button">Add</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
